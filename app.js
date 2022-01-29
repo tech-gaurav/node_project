@@ -1,15 +1,19 @@
-const express = require('express');
+//require('dotenv').configure()
+const express = require('express') 
+const app = express()
+const routes = require('./routes/tasks')
+
+//middleware
+app.use(express.json())
+
+
+//routes
+app.get('/ping', (req, res) => {
+    res.send("pong")
+})
+
+app.use('/api/tasks',routes)
+
 const port = 8000
 
-const app = express();
-
-const start = (req,res)=>{
-   res.send("node project start")
-}
-
-app.use(start)
-
-
-app.listen(port,()=>{
-    console.log(`node project listening on ${port}`)
-});
+app.listen(port, console.log(`server listening on port ${port}`))
